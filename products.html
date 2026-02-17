@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftCart | Our Products</title>
+    <!-- DaisyUI and Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366f1",
+                        secondary: "#a855f7",
+                        accent: "#f43f5e",
+                        dark: "#1a1a1a",
+                        "base-200": "#f8fafc",
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .category-chip.active {
+            @apply bg-[#6366f1] text-white border-[#6366f1];
+        }
+
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-white font-sans text-[#1a1a1a]">
+
+    <!-- Navbar -->
+    <nav class="navbar bg-white sticky top-0 z-50 px-4 lg:px-32 py-4 border-b border-gray-100">
+        <div class="navbar-start">
+            <a href="index.html" class="text-3xl font-bold text-primary italic">SwiftCart</a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1 gap-10 font-semibold text-gray-700">
+                <li><a href="index.html" class="hover:text-primary transition-colors p-0">Home</a></li>
+                <li><a href="products.html" class="text-primary hover:text-primary transition-colors p-0">Products</a>
+                </li>
+                <li><a class="hover:text-primary transition-colors p-0">About</a></li>
+                <li><a class="hover:text-primary transition-colors p-0">Contact</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end gap-6">
+            <div class="indicator cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-gray-600" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="py-16 container mx-auto px-4 lg:px-32">
+        <h1 class="text-4xl font-bold text-center mb-10">Our Products</h1>
+
+        <!-- Category Filter -->
+        <div id="category-list" class="flex flex-wrap justify-center gap-3 mb-16">
+            <!-- Categories will be injected here -->
+            <button class="category-chip btn btn-sm rounded-full bg-primary text-white border-primary active px-6"
+                data-category="all">All</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Loading Skeletons will be here -->
+        </div>
+
+        <!-- Product Details Modal -->
+        <dialog id="product_modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box max-w-4xl p-0 overflow-hidden bg-white rounded-[32px]">
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4 z-10">✕</button>
+                </form>
+                <div id="modal-content" class="flex flex-col md:flex-row">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1a1c23] text-white pt-24 pb-12 px-4 lg:px-32">
+        <div
+            class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20 border-b border-gray-800 pb-20">
+            <div class="space-y-6">
+                <a class="text-3xl font-bold italic text-white block">SwiftCart</a>
+                <p class="text-gray-400 leading-relaxed">Your one-stop shop for all your fashion and lifestyle needs.
+                    Quality products, fast delivery, and excellent support.</p>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold mb-8 italic">QUICK LINKS</h4>
+                <ul class="space-y-4 text-gray-400">
+                    <li><a href="index.html" class="hover:text-primary transition-colors">Home</a></li>
+                    <li><a href="products.html" class="hover:text-primary transition-colors">Products</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">About</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold mb-8 italic">SUPPORT</h4>
+                <ul class="space-y-4 text-gray-400">
+                    <li><a href="#" class="hover:text-primary transition-colors">FAQ</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Shipping</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Returns</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold mb-8 italic text-white">SUBSCRIBE</h4>
+                <div class="join w-full bg-[#2a2d39] p-1 rounded-xl">
+                    <input class="input join-item w-full bg-transparent border-none text-white focus:outline-none"
+                        placeholder="Email" />
+                    <button class="btn btn-primary join-item rounded-lg font-bold">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-gray-500">© 2025 SwiftCart, Inc. All rights reserved.</p>
+            <div class="flex gap-6">
+                <!-- Socials -->
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
